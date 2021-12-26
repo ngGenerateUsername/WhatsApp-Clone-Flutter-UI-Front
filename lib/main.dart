@@ -16,8 +16,12 @@ class MyApp extends StatelessWidget {
     final ThemeData theme = ThemeData();
     return MaterialApp(
       theme: theme.copyWith(
-          colorScheme: theme.colorScheme.copyWith(
-              primary: Color(0xFF075E54), background: Color(0xFF0EB3EE))),
+        textTheme: ThemeData.light().textTheme.apply(fontFamily: 'OpenSans'),
+        colorScheme: theme.colorScheme.copyWith(
+          primary: Color(0xFF075E54),
+          secondary: Color(0xFF128C7E),
+        ),
+      ),
       home: HomeScreen(),
       debugShowCheckedModeBanner: false,
     );

@@ -2,6 +2,7 @@
 
 // ignore: unused_import
 import 'package:flutter/material.dart';
+import 'package:front/pages/ChatPage.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,10 +14,34 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   late TabController _controller;
+
+  // ignore: prefer_final_fields
+  List<PopupMenuEntry<String>> _widgetList = [
+    PopupMenuItem(
+      child: Text('New group'),
+      value: '0',
+    ),
+    PopupMenuItem(
+      child: Text('New broadcast'),
+      value: '1',
+    ),
+    PopupMenuItem(
+      child: Text('WhatsApp Web'),
+      value: '2',
+    ),
+    PopupMenuItem(
+      child: Text('Starred messages'),
+      value: '3',
+    ),
+    PopupMenuItem(
+      child: Text('Settings'),
+      value: '4',
+    ),
+  ];
   @override
   void initState() {
     super.initState();
-    _controller = TabController(length: 4, vsync: this, initialIndex: 0);
+    _controller = TabController(length: 4, vsync: this, initialIndex: 1);
   }
 
   @override
@@ -26,9 +51,15 @@ class _HomeScreenState extends State<HomeScreen>
         title: Text("WhatsApp Clone"),
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.more_vert)),
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              print(value);
+            },
+            itemBuilder: (context) => _widgetList,
+          ),
         ],
         bottom: TabBar(
+          indicatorColor: Colors.white,
           controller: _controller,
           // ignore: prefer_const_literals_to_create_immutables
           tabs: [
@@ -47,8 +78,10 @@ class _HomeScreenState extends State<HomeScreen>
         controller: _controller,
         // ignore: prefer_const_literals_to_create_immutables
         children: [
-          Text('Camera'),
-          Text('Chat tab'),
+          Text(
+            'Camera',
+          ),
+          ChatPage(),
           Text('status tab'),
           Text('Calls tab')
         ],
