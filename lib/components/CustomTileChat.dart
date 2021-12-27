@@ -14,7 +14,11 @@ class CustomTileChat extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => DetailChatPage()));
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetailChatPage(
+                      chatModel: chatModel,
+                    )));
       },
       child: Column(
         children: [
