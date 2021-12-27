@@ -1,31 +1,37 @@
-// ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_this
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:front/Models/ChatModel.dart';
+import 'package:front/Screens/DetailChatPage.dart';
 
 class CustomTileChat extends StatelessWidget {
-  const CustomTileChat({Key? key}) : super(key: key);
+  final ChatModel chatModel;
+  const CustomTileChat({Key? key, required this.chatModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => print('tap tap'),
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => DetailChatPage()));
+      },
       child: Column(
         children: [
           ListTile(
             leading: CircleAvatar(
               radius: 30,
               child: SvgPicture.asset(
-                "assets/svg/groups.svg",
+                "assets/svg/" + chatModel.icon.toString(),
                 color: Colors.white,
                 height: 36,
                 width: 36,
               ),
               backgroundColor: Colors.blueGrey,
             ),
-            trailing: Text('18:04'),
+            trailing: Text(chatModel.time.toString()),
             title: Text(
-              'Ahmed BH',
+              chatModel.name.toString(),
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             subtitle: Row(
@@ -35,7 +41,7 @@ class CustomTileChat extends StatelessWidget {
                   width: 4,
                 ),
                 Text(
-                  "Hi ahmed!",
+                  chatModel.currentMessage.toString(),
                   style: TextStyle(fontSize: 13),
                 )
               ],
