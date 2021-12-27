@@ -1,4 +1,5 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, sized_box_for_whitespace
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:front/Models/ChatModel.dart';
@@ -118,71 +119,85 @@ class _DetailChatPageState extends State<DetailChatPage> {
             ListView(),
             Align(
               alignment: Alignment.bottomCenter,
-              child: Row(
+              child: Column(
                 children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width - 60,
-                    child: Card(
-                      margin: EdgeInsets.only(left: 2, right: 2, bottom: 8),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      child: TextFormField(
-                        textAlignVertical: TextAlignVertical.center,
-                        keyboardType: TextInputType.multiline,
-                        maxLines: 5,
-                        minLines: 1,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Type a message...",
-                          contentPadding: EdgeInsets.all(5),
-                          prefixIcon: IconButton(
-                            icon: Icon(
-                              Icons.emoji_emotions,
-                            ),
-                            onPressed: () => print('dont press me'),
+                  Row(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width - 60,
+                        child: Card(
+                          margin: EdgeInsets.only(left: 2, right: 2, bottom: 8),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
                           ),
-                          suffixIcon: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              IconButton(
-                                onPressed: () {},
-                                icon: Icon(Icons.attach_file),
+                          child: TextFormField(
+                            textAlignVertical: TextAlignVertical.center,
+                            keyboardType: TextInputType.multiline,
+                            maxLines: 5,
+                            minLines: 1,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: "Type a message...",
+                              contentPadding: EdgeInsets.all(5),
+                              prefixIcon: IconButton(
+                                icon: Icon(
+                                  Icons.emoji_emotions,
+                                ),
+                                onPressed: () => print('dont press me'),
                               ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: Icon(Icons.camera_alt),
-                              )
-                            ],
+                              suffixIcon: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(Icons.attach_file),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(Icons.camera_alt),
+                                  )
+                                ],
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      bottom: 8,
-                      right: 5,
-                      left: 2,
-                    ),
-                    child: CircleAvatar(
-                      backgroundColor: Color(0xFF128C7E),
-                      radius: 25,
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.mic,
-                          color: Colors.white,
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          bottom: 8,
+                          right: 5,
+                          left: 2,
+                        ),
+                        child: CircleAvatar(
+                          backgroundColor: Color(0xFF128C7E),
+                          radius: 25,
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.mic,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
+                  emojSelect(),
                 ],
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget emojSelect() {
+    return EmojiPicker(
+      onEmojiSelected: (category, emoji) {
+        print(category);
+        print(emoji);
+      },
     );
   }
 }
