@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, unused_import, prefer_const_constructors, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, unused_field, curly_braces_in_flow_control_structures
 import 'package:flutter/material.dart';
 import 'package:front/Models/ChatModel.dart';
+import 'package:front/Screens/CreateGroup.dart';
 import 'package:front/components/ContactTile.dart';
 import 'package:front/main.dart';
 
@@ -118,9 +119,16 @@ class _SelectContactState extends State<SelectContact> {
           itemCount: _contacts.length + 2,
           itemBuilder: (context, index) {
             if (index == 0)
-              return primaryCard(
-                "new group",
-                Icons.group,
+              return InkWell(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return CreateGroup();
+                  }));
+                },
+                child: primaryCard(
+                  "new group",
+                  Icons.group,
+                ),
               );
             if (index == 1)
               return primaryCard(
@@ -134,24 +142,21 @@ class _SelectContactState extends State<SelectContact> {
   }
 
   Widget primaryCard(String name, IconData icon) {
-    return InkWell(
-      onTap: () => print("inkWell"),
-      child: ListTile(
-        leading: CircleAvatar(
-          radius: 23,
-          child: Icon(
-            icon,
-            size: 26,
-            color: Colors.white,
-          ),
-          backgroundColor: Color(0xFF25D366),
+    return ListTile(
+      leading: CircleAvatar(
+        radius: 23,
+        child: Icon(
+          icon,
+          size: 26,
+          color: Colors.white,
         ),
-        title: Text(
-          name,
-          style: TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
-          ),
+        backgroundColor: Color(0xFF25D366),
+      ),
+      title: Text(
+        name,
+        style: TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );
