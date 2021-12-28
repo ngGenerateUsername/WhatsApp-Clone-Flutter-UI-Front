@@ -33,7 +33,7 @@ class _ChatPageState extends State<ChatPage> {
         time: "13:00",
         icon: "person.svg"),
     ChatModel(
-        name: "karim jounta",
+        name: "karim Dridi",
         isGroup: false,
         currentMessage: "ana fel sale de jeux a5lat",
         time: "00:00",
@@ -45,7 +45,7 @@ class _ChatPageState extends State<ChatPage> {
         time: "21:00",
         icon: "groups.svg"),
     ChatModel(
-        name: "Ahmed Ben Hamouda",
+        name: "Taoufik",
         isGroup: false,
         currentMessage: "Happy birthday!",
         time: "00:01",
