@@ -1,10 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:front/Screens/CameraScreen.dart';
 import 'Screens/HomeScreen.dart';
 
 // void main() => runApp(MyApp());
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
   runApp(MyApp());
 }
 
