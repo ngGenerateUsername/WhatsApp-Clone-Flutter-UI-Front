@@ -2,6 +2,9 @@
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:front/Screens/CameraView.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 
 List<CameraDescription> cameras = [];
 
@@ -23,6 +26,13 @@ class _CameraScreenState extends State<CameraScreen> {
     super.initState();
     _cameraController = new CameraController(cameras[0], ResolutionPreset.high);
     cameraValue = _cameraController.initialize();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _cameraController.dispose();
   }
 
   @override
@@ -66,7 +76,9 @@ class _CameraScreenState extends State<CameraScreen> {
                           ),
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            takePhoto(context);
+                          },
                           child: Icon(
                             Icons.panorama_fish_eye,
                             color: Colors.white,
@@ -96,5 +108,17 @@ class _CameraScreenState extends State<CameraScreen> {
         ),
       ),
     );
+  }
+
+  void takePhoto(BuildContext context) async {
+    final path =
+        join((await getTemporaryDirectory()).path, "${DateTime.now()}.png");
+    var completeCapture = await _cameraController.takePicture();
+    completeCapture.saveTo(path);
+    Navigator.push(context, MaterialPageRoute(builder: (builder) {
+      return CameraView(
+        path: path,
+      );
+    }));
   }
 }
